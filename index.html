@@ -35,6 +35,62 @@
       /* Custom utility for fonts */
       [dir="rtl"] { font-family: 'Cairo', sans-serif; }
       [lang="ur"] { font-family: 'Noto Nastaliq Urdu', serif; line-height: 2 !important; }
+      
+      /* Animation keyframes */
+      @keyframes fadeInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      .animate-fade-in-down {
+        animation: fadeInDown 0.8s ease-out forwards;
+      }
+      
+      .animate-fade-in-up {
+        animation: fadeInUp 0.8s ease-out forwards;
+      }
+      
+      .animation-delay-200 {
+        animation-delay: 0.2s;
+        opacity: 0;
+      }
+      
+      .animation-delay-300 {
+        animation-delay: 0.3s;
+        opacity: 0;
+      }
+      
+      .animation-delay-400 {
+        animation-delay: 0.4s;
+        opacity: 0;
+      }
+      
+      .animation-delay-500 {
+        animation-delay: 0.5s;
+        opacity: 0;
+      }
+      
+      .animation-delay-600 {
+        animation-delay: 0.6s;
+        opacity: 0;
+      }
     </style>
   <script type="importmap">
 {

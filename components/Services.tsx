@@ -6,11 +6,28 @@ import { useLanguage } from '../contexts/LanguageContext';
 export const Services: React.FC = () => {
   const { t, dir } = useLanguage();
   const ArrowIcon = dir === 'rtl' ? ArrowUpLeft : ArrowUpRight;
+  const [isVisible, setIsVisible] = React.useState(false);
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setIsVisible(entry.isIntersecting);
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const section = document.getElementById('services');
+    if (section) observer.observe(section);
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section id="services" className="py-20 bg-slate-50" dir={dir}>
       <div className="container mx-auto px-4 md:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-16">
+        <div className={`text-center max-w-2xl mx-auto mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <h2 className="text-brand-accent font-bold uppercase tracking-wider text-sm mb-3">
             {t('services.section_label')}
           </h2>
@@ -23,13 +40,14 @@ export const Services: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {SERVICES_LIST.map((service) => {
+          {SERVICES_LIST.map((service, index) => {
             const Icon = service.icon;
             return (
               <a 
                 key={service.id}
                 href={`#${service.id}`}
-                className="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col h-full"
+                className={`group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500 border border-slate-100 flex flex-col h-full ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+                style={{ transitionDelay: `${index * 100}ms` }}
               >
                 <div className="relative h-48 overflow-hidden">
                   <div className="absolute inset-0 bg-brand-blue/20 group-hover:bg-brand-blue/0 transition-colors z-10"></div>

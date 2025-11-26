@@ -21,28 +21,28 @@ export const Hero: React.FC = () => {
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 text-center md:text-start">
         <div className="max-w-3xl">
-          <div className="inline-block bg-brand-accent/20 border border-brand-accent/30 backdrop-blur-sm rounded-full px-4 py-1 mb-6">
+          <div className="inline-block bg-brand-accent/20 border border-brand-accent/30 backdrop-blur-sm rounded-full px-4 py-1 mb-6 animate-fade-in-down">
             <span className="text-brand-accent font-medium text-sm tracking-wider uppercase">
               {t('hero.tagline')}
             </span>
           </div>
           
-          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight animate-fade-in-up animation-delay-200">
             {t('hero.title_prefix')} <span className="text-brand-accent">{t('hero.title_suffix')}</span>
           </h1>
           
-          <h2 className="text-xl md:text-2xl text-slate-200 mb-2 font-light">
+          <h2 className="text-xl md:text-2xl text-slate-200 mb-2 font-light animate-fade-in-up animation-delay-300">
             {t('hero.subtitle')}
           </h2>
-          <h2 className={`text-xl md:text-3xl text-white font-arabic mb-8 ${dir === 'ltr' ? 'dir-rtl' : ''}`}>
+          <h2 className={`text-xl md:text-3xl text-white font-arabic mb-8 animate-fade-in-up animation-delay-400 ${dir === 'ltr' ? 'dir-rtl' : ''}`}>
             {t('hero.arabic_name')}
           </h2>
 
-          <p className="text-slate-300 text-lg mb-10 max-w-xl leading-relaxed">
+          <p className="text-slate-300 text-lg mb-10 max-w-xl leading-relaxed animate-fade-in-up animation-delay-500">
              {t('hero.description')}
           </p>
 
-          <div className="flex flex-col md:flex-row gap-4 justify-center md:justify-start">
+          <div className="flex flex-col md:flex-row gap-4 justify-center md:justify-start animate-fade-in-up animation-delay-600">
             <a 
               href="#services" 
               className="group bg-white text-brand-blue px-8 py-4 rounded font-bold hover:bg-slate-100 transition-colors flex items-center justify-center gap-2"

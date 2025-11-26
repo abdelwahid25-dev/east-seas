@@ -5,12 +5,30 @@ import { useLanguage } from '../contexts/LanguageContext';
 export const About: React.FC = () => {
   const { t, dir } = useLanguage();
 
+  const [isVisible, setIsVisible] = React.useState(false);
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setIsVisible(entry.isIntersecting);
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const section = document.getElementById('about');
+    if (section) observer.observe(section);
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section id="about" className="py-20 md:py-32 bg-white" dir={dir}>
       <div className="container mx-auto px-4 md:px-8">
         
         <div className="grid md:grid-cols-2 gap-16 items-center mb-24">
-          <div className="order-2 md:order-1">
+          <div className={`order-2 md:order-1 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
             <h2 className="text-brand-accent font-bold uppercase tracking-wider text-sm mb-3">
               {t('about.section_label')}
             </h2>
@@ -37,7 +55,7 @@ export const About: React.FC = () => {
               </div>
             </div>
           </div>
-          <div className="order-1 md:order-2 relative">
+          <div className={`order-1 md:order-2 relative transition-all duration-1000 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
             <div className={`absolute -inset-4 bg-brand-accent/10 rounded-xl transform ${dir === 'rtl' ? '-rotate-3' : 'rotate-3'}`}></div>
             <img 
               src={`${import.meta.env.BASE_URL}images/about.jpg`} 
@@ -52,7 +70,11 @@ export const About: React.FC = () => {
           {CORE_VALUES.map((value, index) => {
             const Icon = value.icon;
             return (
-              <div key={index} className="bg-slate-50 p-8 rounded-xl border border-slate-100 hover:shadow-lg transition-shadow group">
+              <div 
+                key={index} 
+                className={`bg-slate-50 p-8 rounded-xl border border-slate-100 hover:shadow-lg hover:-translate-y-2 transition-all duration-500 group ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+                style={{ transitionDelay: `${index * 150}ms` }}
+              >
                 <div className="w-14 h-14 bg-white rounded-full shadow-sm flex items-center justify-center mb-6 text-brand-blue group-hover:bg-brand-blue group-hover:text-white transition-colors">
                   <Icon size={28} />
                 </div>
