@@ -9,8 +9,9 @@ export default defineConfig(({ mode }) => {
         port: 3000,
         host: '0.0.0.0',
       },
-      // Base path for GitHub Pages (repository name). Change if different.
-      base: '/east-seas/',
+      // Base path: '/' for Netlify/Vercel, '/east-seas/' for GitHub Pages
+      // Set VITE_BASE_PATH env var to override (e.g., VITE_BASE_PATH=/ npm run build)
+      base: env.VITE_BASE_PATH || '/',
       plugins: [react()],
       define: {
         'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),
