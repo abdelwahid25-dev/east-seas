@@ -12,13 +12,17 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [language, setLanguage] = useState<Language>('en');
-  const [dir, setDir] = useState<Direction>('ltr');
+  const [language, setLanguage] = useState<Language>(() => {
+    const saved = localStorage.getItem('language');
+    return (saved as Language) || 'ar';
+  });
+  const [dir, setDir] = useState<Direction>('rtl');
 
   useEffect(() => {
     setDir(language === 'en' ? 'ltr' : 'rtl');
     document.body.dir = language === 'en' ? 'ltr' : 'rtl';
     document.documentElement.lang = language;
+    localStorage.setItem('language', language);
   }, [language]);
 
   const t = (path: string) => {
