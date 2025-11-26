@@ -16,7 +16,7 @@ export const translations = {
       title_prefix: "East Seas",
       title_suffix: "Logistics",
       subtitle: "Customs Clearance & Transportation",
-      arabic_name: "بحار الشرق للتخليص الجمركي والنقليات",
+      arabic_name: "East Seas for Customs Clearance and Transportation",
       description: "We offer services in customs clearance and transport of goods imported and exported through King Abdul-Aziz Customs Port in Dammam.",
       cta_primary: "Explore Services",
       cta_secondary: "Contact Us"

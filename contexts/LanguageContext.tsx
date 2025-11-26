@@ -16,14 +16,23 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
     const saved = localStorage.getItem('language');
     return (saved as Language) || 'ar';
   });
-  const [dir, setDir] = useState<Direction>('rtl');
+  const [dir, setDir] = useState<Direction>(() => {
+    const saved = localStorage.getItem('language');
+    return (saved === 'en' ? 'ltr' : 'rtl');
+  });
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
     setDir(language === 'en' ? 'ltr' : 'rtl');
     document.body.dir = language === 'en' ? 'ltr' : 'rtl';
     document.documentElement.lang = language;
     localStorage.setItem('language', language);
+    setIsReady(true);
   }, [language]);
+
+  if (!isReady) {
+    return null;
+  }
 
   const t = (path: string) => {
     const keys = path.split('.');
